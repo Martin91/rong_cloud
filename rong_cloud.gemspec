@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name         = 'rongcloud-server'
+  s.name         = 'rong_cloud'
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
   s.summary      = '融云 Server API SDK'
@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.files        = `git ls-files`.split("\n")
   s.authors      = ['Martin Hong']
   s.email        = 'hongzeqin@gmail.com'
-  s.homepage     = 'https://github.com/Martin91/rongcloud-server'
+  s.homepage     = 'https://github.com/Martin91/rong_cloud'
   s.license      = 'MIT'
 end
