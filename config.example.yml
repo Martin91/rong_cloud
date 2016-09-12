@@ -1,0 +1,5 @@
+app_key: APP_KEY
+app_secret: APP_SECRET
+host: https://api.cn.ronghub.com
+log_file: log/rongcloud.log
+log_level: debug
