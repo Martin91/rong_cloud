@@ -1,7 +1,7 @@
 require 'test_helper'
 
 module RongCloud
-  class ConnectionTest < Minitest::Test
+  class ConfigurationTest < Minitest::Test
     def test_app_key_settings_and_reading
       RongCloud::Configuration.app_key = "test_key"
       assert_equal "test_key", RongCloud::Configuration.app_key
