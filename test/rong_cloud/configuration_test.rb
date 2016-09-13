@@ -2,6 +2,12 @@ require 'test_helper'
 
 module RongCloud
   class ConfigurationTest < Minitest::Test
+    def setup
+      RongCloud.configure do |config|
+        config.host = nil
+      end
+    end
+
     def test_app_key_settings_and_reading
       RongCloud::Configuration.app_key = "test_key"
       assert_equal "test_key", RongCloud::Configuration.app_key
