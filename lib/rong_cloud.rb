@@ -1,5 +1,6 @@
 require 'rong_cloud/configuration'
-require 'rong_cloud/connection'
+require 'rong_cloud/request'
+require 'rong_cloud/errors'
 
 module RongCloud
   # 配置融云 Server 连接信息
