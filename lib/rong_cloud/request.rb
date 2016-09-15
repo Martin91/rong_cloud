@@ -13,7 +13,7 @@ module RongCloud
 
     def initialize_request(uri, params)
       req = Net::HTTP::Post.new(uri)
-      req.set_form_data(params) if params && params.respond_to?(:map)
+      req.set_form_data(params) if params.respond_to?(:map)
       signed_headers.each { |header, value| req[header] = value }
 
       req
