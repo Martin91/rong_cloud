@@ -50,5 +50,12 @@ module RongCloud
       assert_equal "userId is required.", error.message
       assert_equal 1002, error.business_code
     end
+
+    def test_request_with_valid_params
+      response = request("/user/getToken", { userId: 'user', name: "User", portraitUri: "uri" })
+      assert_equal 200, response["code"]
+      assert_equal "user", response["userId"]
+      assert response["token"]
+    end
   end
 end
