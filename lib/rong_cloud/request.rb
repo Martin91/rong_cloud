@@ -7,7 +7,7 @@ module RongCloud
     include Signature
 
     def get_uri(path)
-      url = "#{RongCloud::Configuration.host}/#{path}"
+      url = "#{RongCloud::Configuration.host}/#{path.gsub(/^\//, "")}"
       URI(url.end_with?(".json") ? url : "#{url}.json")
     end
 
@@ -34,7 +34,6 @@ module RongCloud
     def request(path, params)
       uri = get_uri(path)
       req = initialize_request(uri, params)
-
       use_ssl = uri.scheme == 'https'
       res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: use_ssl) do |http|
         http.request(req)

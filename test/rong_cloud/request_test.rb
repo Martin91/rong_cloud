@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'byebug'
 
 module RongCloud
   class RequestTest < Minitest::Test
@@ -22,6 +23,24 @@ module RongCloud
       uri = get_uri("users")
       assert_equal "/users.json", uri.path
       assert_equal "api.cn.ronghub.com", uri.host
+    end
+
+    def test_request_with_invalid_app_key
+      RongCloud::Configuration.app_key = "xxx"
+      error = assert_raises RongCloud::BadRequest do
+        request("/user/getToken", {userId: 'user', name: "User"})
+      end
+      assert_equal "invalid App-Key.", error.message
+      assert_equal 1002, error.business_code
+    end
+
+    def test_request_with_invalid_app_secret
+      RongCloud::Configuration.app_secret = "xxx"
+      error = assert_raises RongCloud::AuthenticationFailed do
+        request("/user/getToken", {userId: 'user', name: "User"})
+      end
+      assert_equal "签名错误，请检查。", error.message
+      assert_equal 1004, error.business_code
     end
   end
 end
