@@ -13,7 +13,7 @@ module RongCloud
 
     def initialize_request(uri, params)
       req = Net::HTTP::Post.new(uri)
-      req.set_form_data(params)
+      req.set_form_data(params) if params && params.respond_to?(:map)
       signed_headers.each { |header, value| req[header] = value }
 
       req
@@ -31,7 +31,7 @@ module RongCloud
       end
     end
 
-    def request(path, params)
+    def request(path, params = nil)
       uri = get_uri(path)
       req = initialize_request(uri, params)
       use_ssl = uri.scheme == 'https'

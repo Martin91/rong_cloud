@@ -42,5 +42,13 @@ module RongCloud
       assert_equal "签名错误，请检查。", error.message
       assert_equal 1004, error.business_code
     end
+
+    def test_request_with_missing_required_field
+      error = assert_raises RongCloud::BadRequest do
+        request("/user/getToken")
+      end
+      assert_equal "userId is required.", error.message
+      assert_equal 1002, error.business_code
+    end
   end
 end
