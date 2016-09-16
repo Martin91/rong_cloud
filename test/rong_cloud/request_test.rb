@@ -1,16 +1,11 @@
 require 'test_helper'
-require 'byebug'
 
 module RongCloud
   class RequestTest < Minitest::Test
     include RongCloud::Request
 
     def setup
-      RongCloud.configure do |config|
-        $settings.each do |setting, value|
-          config.send("#{setting}=", value)
-        end
-      end
+      rong_cloud_configure_with_settings
     end
 
     def test_get_uri_path_end_with_json_format
