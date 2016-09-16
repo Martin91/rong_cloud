@@ -23,6 +23,11 @@ module RongCloud
         response = @service.get_token("user", "User", "fake_url")
         assert response["token"]
       end
+
+      def test_get_token_with_chinese_name
+        response = @service.get_token("user", "王二狗", "fake_url")
+        assert response["token"]
+      end
     end
   end
 end
