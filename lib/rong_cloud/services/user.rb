@@ -17,6 +17,18 @@ module RongCloud
       def check_online(userId)
         request("/user/checkOnline", { userId: userId })
       end
+
+      def block_user(userId, minute)
+        request("/user/block", { userId: userId, minute: minute })
+      end
+
+      def unblock_user(userId)
+        request("/user/unblock", userId: userId)
+      end
+
+      def blocked_users
+        request("/user/block/query")
+      end
     end
   end
 end
