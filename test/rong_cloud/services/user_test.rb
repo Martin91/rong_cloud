@@ -113,6 +113,32 @@ module RongCloud
         response = @service.unblock_user("blocked_user2")
         assert 200, response["code"]
       end
+
+      def test_blacklist_add_for_unexisted_user_id
+        response = @service.blacklist_add("unexisted", "blacklisted_user")
+        assert_equal 200, response["code"]
+      end
+
+      def test_blacklist_add_for_existed_user_with_multiple_black_user_id
+        response = @service.blacklist_add("user", %w(blu blu2 blu3))
+        assert_equal 200, response["code"]
+      end
+
+      def test_blacklist_remove_for_unexisted_user_id
+        response = @service.blacklist_remove("unexisted_user", "blacklisted_user")
+        assert_equal 200, response["code"]
+      end
+
+      def test_blacklist_remove_for_unblacklisted_user_id
+        response = @service.blacklist_remove("user", "unexisted_user")
+        assert_equal 200, response["code"]
+      end
+
+      def test_blacklisted_users
+        @service.blacklist_add("user", %w(user2 user3))
+        response = @service.blacklisted_users("user")
+        assert %w(user2 user3) & response["users"] == %w(user2 user3)
+      end
     end
   end
 end

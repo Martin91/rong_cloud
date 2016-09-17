@@ -29,6 +29,18 @@ module RongCloud
       def blocked_users
         request("/user/block/query")
       end
+
+      def blacklist_add(user_id, black_user_id)
+        request("/user/blacklist/add", userId: user_id, blackUserId: black_user_id)
+      end
+
+      def blacklist_remove(user_id, black_user_id)
+        request("/user/blacklist/remove", userId: user_id, blackUserId: black_user_id)
+      end
+
+      def blacklisted_users(user_id)
+        request("/user/blacklist/query", userId: user_id)
+      end
     end
   end
 end
