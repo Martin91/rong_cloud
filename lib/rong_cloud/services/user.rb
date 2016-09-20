@@ -1,5 +1,3 @@
-require 'rong_cloud/request'
-
 module RongCloud
   module Services
     module User
