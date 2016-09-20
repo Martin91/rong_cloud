@@ -1,4 +1,5 @@
 module RongCloud
+  class UnsupportedMessageChannelName < ::StandardError;end
   class RequestError < ::StandardError
     attr_accessor :business_code
   end
