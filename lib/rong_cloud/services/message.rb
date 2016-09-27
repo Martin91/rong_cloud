@@ -34,6 +34,10 @@ module RongCloud
       def send_system_message(from_user_id, to_user_id, object_name, content, options = {})
         send_message(from_user_id, to_user_id, :system, object_name, content, options)
       end
+
+      def send_group_message(from_user_id, to_group_id, object_name, content, options = {})
+        send_message(from_user_id, to_group_id, :group, object_name, content, options)
+      end
     end
   end
 end
