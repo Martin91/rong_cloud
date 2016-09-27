@@ -57,6 +57,22 @@ module RongCloud
         response = @service.send_group_message(1, [2, 3, 4], "RC:TxtMsg", { content: "hello world", extra: "nothing" }, options)
         assert_equal 200, response["code"]
       end
+
+      def test_send_discussion_message_with_single_to_discussion_id
+        response = @service.send_discussion_message(1, 2, "RC:TxtMsg", { content: "hello world", extra: "nothing" })
+        assert_equal 200, response["code"]
+      end
+
+      def test_send_discussion_message_with_multiple_to_discussion_ids
+        response = @service.send_discussion_message(1, [2, 3, 4], "RC:TxtMsg", { content: "hello world", extra: "nothing" })
+        assert_equal 200, response["code"]
+      end
+
+      def test_send_discussion_message_with_options
+        options = { pushContent: "hello", pushData: { shouldBeTrue: "true" } }
+        response = @service.send_discussion_message(1, [2, 3, 4], "RC:TxtMsg", { content: "hello world", extra: "nothing" }, options)
+        assert_equal 200, response["code"]
+      end
     end
   end
 end
