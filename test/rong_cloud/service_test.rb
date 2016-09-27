@@ -1,9 +1,11 @@
 require 'test_helper'
 require 'rong_cloud/services/user_test'
+require 'rong_cloud/services/message_test'
 
 module RongCloud
   class ServiceTest < Minitest::Test
     include RongCloud::Services::UserTest
+    include RongCloud::Services::MessageTest
 
     def setup
       rong_cloud_configure_with_settings
