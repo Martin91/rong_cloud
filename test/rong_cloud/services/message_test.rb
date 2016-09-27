@@ -73,6 +73,11 @@ module RongCloud
         response = @service.send_discussion_message(1, [2, 3, 4], "RC:TxtMsg", { content: "hello world", extra: "nothing" }, options)
         assert_equal 200, response["code"]
       end
+
+      def test_send_broadcast_message
+        response = @service.send_broadcast_message(1, "RC:TxtMsg", { content: "hello world", extra: "nothing" })
+        assert_equal 200, response["code"]
+      end
     end
   end
 end
