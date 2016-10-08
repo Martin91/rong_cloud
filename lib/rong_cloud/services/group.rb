@@ -12,6 +12,10 @@ module RongCloud
 
         request("/group/sync", params)
       end
+
+      def create_group(user_id, group_id, group_name)
+        request("/group/create", userId: user_id, groupId: group_id, groupName: group_name)
+      end
     end
   end
 end
