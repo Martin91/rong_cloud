@@ -49,6 +49,11 @@ module RongCloud
         response = @service.join_group('user1', '5', nil)
         assert_equal 200, response['code']
       end
+
+      def test_quit_group
+        response = @service.quit_group('user', 'group1')
+        assert_equal 200, response['code']
+      end
     end
   end
 end
