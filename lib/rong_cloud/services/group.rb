@@ -24,6 +24,10 @@ module RongCloud
       def quit_group(user_id, group_id)
         request("/group/quit", userId: user_id, groupId: group_id)
       end
+
+      def dismiss_group(user_id, group_id)
+        request("/group/dismiss", userId: user_id, groupId: group_id)
+      end
     end
   end
 end
