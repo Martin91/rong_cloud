@@ -28,6 +28,10 @@ module RongCloud
       def dismiss_group(user_id, group_id)
         request("/group/dismiss", userId: user_id, groupId: group_id)
       end
+
+      def refresh_group(group_id, group_name)
+        request("/group/refresh", groupId: group_id, groupName: group_name)
+      end
     end
   end
 end

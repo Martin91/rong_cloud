@@ -59,6 +59,11 @@ module RongCloud
         response = @service.dismiss_group('user', 'group1')
         assert_equal 200, response['code']
       end
+
+      def test_refresh_group
+        response = @service.refresh_group('group1', "测试群组1")
+        assert_equal 200, response['code']
+      end
     end
   end
 end
