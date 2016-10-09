@@ -44,6 +44,10 @@ module RongCloud
       def unblock_group_member(user_id, group_id)
         request("/group/user/gag/rollback", userId: user_id, groupId: group_id)
       end
+
+      def blocked_group_members(group_id)
+        request("/group/user/gag/list", groupId: group_id)
+      end
     end
   end
 end

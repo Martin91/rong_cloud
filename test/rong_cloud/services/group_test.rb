@@ -85,6 +85,18 @@ module RongCloud
         response = @service.unblock_group_member("user1", "group1")
         assert_equal 200, response['code']
       end
+
+      def test_blocked_group_members
+        @service.create_group("user1", "group1", "测试群组禁言服务")
+        @service.join_group("user2", "group1", "测试群组禁言服务")
+        @service.block_group_member("user2", "group1", 60000)
+
+        response = @service.blocked_group_members('group1')
+        user_ids = response['users'].map{|user| user['userId']}
+
+        assert_equal 1, user_ids.count
+        assert_includes user_ids, "user2"
+      end
     end
   end
 end
