@@ -2,6 +2,7 @@ require 'rong_cloud/services/message/message_channel'
 
 module RongCloud
   module Services
+    # 消息发送相关接口 http://www.rongcloud.cn/docs/server.html#消息发送服务
     module Message
       # 通用的发送消息方法
       # @param from_user_id [String] 消息发起人 id
@@ -27,22 +28,28 @@ module RongCloud
         request(message_channel.api_path, params)
       end
 
+      # 发送单聊消息 http://www.rongcloud.cn/docs/server.html#发送单聊消息_方法
+      #
       def send_private_message(from_user_id, to_user_id, object_name, content, options = {})
         send_message(from_user_id, to_user_id, :private, object_name, content, options)
       end
 
+      # 发送系统消息 http://www.rongcloud.cn/docs/server.html#发送系统消息_方法
       def send_system_message(from_user_id, to_user_id, object_name, content, options = {})
         send_message(from_user_id, to_user_id, :system, object_name, content, options)
       end
 
+      # 发送群组消息 http://www.rongcloud.cn/docs/server.html#发送群组消息_方法
       def send_group_message(from_user_id, to_group_id, object_name, content, options = {})
         send_message(from_user_id, to_group_id, :group, object_name, content, options)
       end
 
+      # 发送讨论组消息 http://www.rongcloud.cn/docs/server.html#发送讨论组消息_方法
       def send_discussion_message(from_user_id, to_discussion_id, object_name, content, options = {})
         send_message(from_user_id, to_discussion_id, :discussion, object_name, content, options)
       end
 
+      # 发送广播消息 http://www.rongcloud.cn/docs/server.html#发送广播消息_方法
       def send_broadcast_message(from_user_id, object_name, content, options = {})
         send_message(from_user_id, nil, :broadcast, object_name, content, options)
       end
