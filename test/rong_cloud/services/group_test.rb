@@ -75,6 +75,11 @@ module RongCloud
         assert_includes user_ids, 'user1'
         assert_includes user_ids, 'user2'
       end
+
+      def test_block_group_member
+        response = @service.block_group_member("user1", "group1", 600)
+        assert_equal 200, response['code']
+      end
     end
   end
 end

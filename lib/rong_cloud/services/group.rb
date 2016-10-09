@@ -36,6 +36,10 @@ module RongCloud
       def group_members(group_id)
         request("/group/user/query", groupId: group_id)
       end
+
+      def block_group_member(user_id, group_id, minute)
+        request("/group/user/gag/add", userId: user_id, groupId: group_id, minute: minute)
+      end
     end
   end
 end
