@@ -5,6 +5,8 @@ require 'rong_cloud/services/wordfilter'
 require 'rong_cloud/services/group'
 
 module RongCloud
+  # 封装所有接口的 Service 类，所有业务接口通过 Service 的实例完成调用
+  #
   class Service
     include RongCloud::Request
     include RongCloud::Services::User
