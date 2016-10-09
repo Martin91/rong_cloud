@@ -8,6 +8,6 @@ Gem::Specification.new do |s|
   s.files        = `git ls-files`.split("\n")
   s.authors      = ['Martin Hong']
   s.email        = 'hongzeqin@gmail.com'
-  s.homepage     = 'https://github.com/Martin91/rong_cloud'
+  s.homepage     = 'http://blog.hackerpie.com/rong_cloud/'
   s.license      = 'MIT'
 end
