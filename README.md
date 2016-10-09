@@ -14,7 +14,14 @@
     config.host = "http://api.cn.ronghub.com"   # default: https://api.cn.ronghub.com, use http is convenient for debugging
   end
   ```
-3. 重启服务器程序或者进程。
+3. 通过 service 对象使用：
+
+  ```ruby
+  service = RongCloud::Service.new
+
+  # 更多方法，请查看测试用例 https://github.com/Martin91/rong_cloud/tree/master/test/rong_cloud/services
+  service.get_token(..., ..., ...)
+  ```
 
 ### 特点
 1. **轻量**：无其他依赖；
