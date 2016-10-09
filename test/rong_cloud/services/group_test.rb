@@ -80,6 +80,11 @@ module RongCloud
         response = @service.block_group_member("user1", "group1", 600)
         assert_equal 200, response['code']
       end
+
+      def test_unblock_group_member
+        response = @service.unblock_group_member("user1", "group1")
+        assert_equal 200, response['code']
+      end
     end
   end
 end
