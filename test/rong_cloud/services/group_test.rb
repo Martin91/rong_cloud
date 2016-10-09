@@ -64,6 +64,17 @@ module RongCloud
         response = @service.refresh_group('group1', "测试群组1")
         assert_equal 200, response['code']
       end
+
+      def test_group_members
+        @service.create_group("user1", "group6", "测试群组成员")
+        @service.join_group("user2", "group6", "测试群组成员")
+        response = @service.group_members("group6")
+        user_ids = response['users'].map{|user| user['id'] }
+
+        assert_equal 2, user_ids.count
+        assert_includes user_ids, 'user1'
+        assert_includes user_ids, 'user2'
+      end
     end
   end
 end

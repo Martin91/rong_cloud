@@ -32,6 +32,10 @@ module RongCloud
       def refresh_group(group_id, group_name)
         request("/group/refresh", groupId: group_id, groupName: group_name)
       end
+
+      def group_members(group_id)
+        request("/group/user/query", groupId: group_id)
+      end
     end
   end
 end
