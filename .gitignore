@@ -1,3 +1,5 @@
 /config.yml
 .byebug_history
 rong_cloud.log
+/doc
+.yardoc/
