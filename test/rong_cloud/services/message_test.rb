@@ -11,6 +11,33 @@ module RongCloud
         assert_equal 200, response["code"]
       end
 
+      def test_send_private_template_message_with_multiple_to_user_ids
+        response = @service.send_private_template_message(1, [2, 3, 4], "RC:TxtMsg",
+          { content: "hello {name}", extra: "nothing" },
+          [
+            {"{name}" => "user2"},
+            {"{name}" => "user3"},
+            {"{name}" => "user4"},
+          ],
+          pushContent: Array.new(3, "欢迎 {name}")
+        )
+        assert_equal 200, response["code"]
+      end
+
+      def test_send_private_template_message_with_multiple_to_user_ids_missing_push_content
+        error = assert_raises RongCloud::MissingOptionError do
+          @service.send_private_template_message(1, [2, 3], "RC:TxtMsg",
+            { content: "hello {name}", extra: "nothing" },
+            [
+              {"{name}" => "user2"},
+              {"{name}" => "user3"}
+            ],
+          )
+        end
+
+        assert_equal "pushContent is required for template messages", error.message
+      end
+
       def test_send_private_message_with_options
         options = { pushContent: "hello", pushData: { shouldBeTrue: "true" } }
         response = @service.send_private_message(1, [2, 3, 4], "RC:TxtMsg", { content: "hello world", extra: "nothing" }, options)
@@ -24,6 +51,19 @@ module RongCloud
 
       def test_send_system_message_with_multiple_to_user_ids
         response = @service.send_system_message(1, [2, 3, 4], "RC:TxtMsg", { content: "hello world", extra: "nothing" })
+        assert_equal 200, response["code"]
+      end
+
+      def test_send_system_template_message_with_multiple_to_user_ids
+        response = @service.send_system_template_message(1, [2, 3, 4], "RC:TxtMsg",
+          { content: "hello {name}", extra: "nothing" },
+          [
+            {"{name}" => "user5"},
+            {"{name}" => "user6"},
+            {"{name}" => "user7"},
+          ],
+          pushContent: Array.new(3, "欢迎 {name}")
+        )
         assert_equal 200, response["code"]
       end
 
