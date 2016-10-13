@@ -1,6 +1,7 @@
 require 'rong_cloud/configuration'
 require 'rong_cloud/errors'
 require 'rong_cloud/service'
+require 'core_ext/array'
 
 # 融云 Ruby SDK 的全局命名空间
 module RongCloud
