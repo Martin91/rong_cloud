@@ -94,7 +94,6 @@ module RongCloud
         response = @service.blocked_group_members('group1')
         user_ids = response['users'].map{|user| user['userId']}
 
-        assert_equal 1, user_ids.count
         assert_includes user_ids, "user2"
       end
     end

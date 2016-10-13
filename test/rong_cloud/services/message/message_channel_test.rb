@@ -13,7 +13,7 @@ module RongCloud
           error = assert_raises RongCloud::UnsupportedMessageChannelName do
             RongCloud::Services::Message::MessageChannel.new(:nothing)
           end
-          expected_error = "support only channels: [\"private\", \"system\", \"group\", \"discussion\", \"chatroom\", \"broadcast\"]"
+          expected_error = "support only channels: [\"private\", \"private_template\", \"system\", \"system_template\", \"group\", \"discussion\", \"chatroom\", \"broadcast\"]"
           assert_equal expected_error, error.message
         end
 
@@ -22,8 +22,18 @@ module RongCloud
           assert_equal "toUserId", channel.target_param_name
         end
 
+        def test_target_param_name_for_private_template
+          channel = RongCloud::Services::Message::MessageChannel.new(:private_template)
+          assert_equal "toUserId", channel.target_param_name
+        end
+
         def test_target_param_name_for_system
           channel = RongCloud::Services::Message::MessageChannel.new(:system)
+          assert_equal "toUserId", channel.target_param_name
+        end
+
+        def test_target_param_name_for_system_template
+          channel = RongCloud::Services::Message::MessageChannel.new(:system_template)
           assert_equal "toUserId", channel.target_param_name
         end
 
@@ -52,9 +62,19 @@ module RongCloud
           assert_equal "/message/private/publish", channel.api_path
         end
 
+        def test_api_path_for_private_template
+          channel = RongCloud::Services::Message::MessageChannel.new(:private_template)
+          assert_equal "/message/private/publish_template", channel.api_path
+        end
+
         def test_api_path_for_system
           channel = RongCloud::Services::Message::MessageChannel.new(:system)
           assert_equal "/message/system/publish", channel.api_path
+        end
+
+        def test_api_path_for_system_template
+          channel = RongCloud::Services::Message::MessageChannel.new(:system_template)
+          assert_equal "/message/system/publish_template", channel.api_path
         end
 
         def test_api_path_for_group

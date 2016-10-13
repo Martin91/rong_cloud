@@ -7,7 +7,9 @@ module RongCloud
         #
         CHANNEL_TO_REQUEST_DETAILS_MAP = {
           'private': { target_param_name: "toUserId", api_path: "/message/private/publish" },
+          private_template: { target_param_name: "toUserId", api_path: "/message/private/publish_template" },
           system: { target_param_name: "toUserId", api_path: "/message/system/publish" },
+          system_template: { target_param_name: "toUserId", api_path: "/message/system/publish_template" },
           group: { target_param_name: 'toGroupId', api_path: "/message/group/publish" },
           discussion: { target_param_name: "toDiscussionId", api_path: "/message/discussion/publish" },
           chatroom: { target_param_name: "toChatroomId", api_path: "/message/chatroom/publish" },
