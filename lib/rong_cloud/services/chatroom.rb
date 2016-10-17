@@ -12,6 +12,15 @@ module RongCloud
 
         request("/chatroom/create", params)
       end
+
+      # 加入聊天室 http://www.rongcloud.cn/docs/server.html#加入聊天室_方法
+      #
+      # @param user_id [String, Array] 一个或多个用户 id
+      # @param chatroom_id [String] 聊天室 id
+      #
+      def join_chatroom(user_id, chatroom_id)
+        request("/chatroom/join", userId: user_id, chatroomId: chatroom_id)
+      end
     end
   end
 end
