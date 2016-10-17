@@ -29,6 +29,14 @@ module RongCloud
       def destroy_chatroom(chatroom_ids)
         request("/chatroom/destroy", chatroomId: chatroom_ids)
       end
+
+      # 查询聊天室信息 http://www.rongcloud.cn/docs/server.html#查询聊天室信息_方法
+      #
+      # @param chatroom_ids [String, Array] 一个或多个聊天室 id
+      #
+      def query_chatroom(chatroom_ids)
+        request("/chatroom/query", chatroomId: chatroom_ids)
+      end
     end
   end
 end

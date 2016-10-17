@@ -39,6 +39,20 @@ module RongCloud
         assert_equal 200, response["code"]
       end
 
+      def test_query_chatroom_with_existed_chatroom_ids
+        create_chatrooms({10007 => "room7", 10008 => "room8"})
+        chatrooms = @service.query_chatroom(%w(10007 10008))["chatRooms"]
+        chatroom_ids = chatrooms.map{ |chatroom| chatroom["chrmId"] }
+        room = chatrooms.detect{ |chatroom| chatroom["chrmId"] == "10007" }
+        assert_equal 2, chatrooms.count
+        assert_equal "room7", room["name"]
+      end
+
+      def test_query_chatroom_with_unexisted_chatroom_ids
+        chatrooms = @service.query_chatroom(%w(unexisted_chat1 unexisted_chat2))["chatRooms"]
+        assert_equal [], chatrooms
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)
