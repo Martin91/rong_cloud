@@ -16,21 +16,32 @@ module RongCloud
       end
 
       def test_join_chatroom_with_multiple_users_less_than_50
-        create_chatroom(10003)
+        create_chatrooms({10003 => "room3"})
         response = @service.join_chatroom(["user1", "user2", "user3"], 10003)
         assert_equal 200, response["code"]
       end
 
       def test_join_chatroom_with_multiple_users_greater_than_50
-        create_chatroom(10004)
+        create_chatrooms({10004 => "room4"})
         users = 1.upto(51).map { |i| "user#{i}" }
         response = @service.join_chatroom(users, 10004)
         assert_equal 200, response["code"]
       end
 
+      def test_destroy_chatroom_with_multiple_chatroom_ids_existed
+        create_chatrooms({10005 => "room5", 10006 => "room6"})
+        response = @service.destroy_chatroom([10005, 10006])
+        assert_equal 200, response["code"]
+      end
+
+      def test_destroy_chatroom_with_multiple_chatroom_ids_unexisted
+        response = @service.destroy_chatroom(%w(unexisted_chat1 unexisted_chat2))
+        assert_equal 200, response["code"]
+      end
+
       private
-      def create_chatroom(id = "10000001")
-        @service.create_chatroom({id => "super chatroom"})
+      def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
+        @service.create_chatroom(chatrooms)
       end
     end
   end

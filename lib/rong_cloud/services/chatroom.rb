@@ -21,6 +21,14 @@ module RongCloud
       def join_chatroom(user_id, chatroom_id)
         request("/chatroom/join", userId: user_id, chatroomId: chatroom_id)
       end
+
+      # 销毁聊天室 http://www.rongcloud.cn/docs/server.html#销毁聊天室_方法
+      #
+      # @param chatroom_ids [String, Array] 一个或多个聊天室 id
+      #
+      def destroy_chatroom(chatroom_ids)
+        request("/chatroom/destroy", chatroomId: chatroom_ids)
+      end
     end
   end
 end
