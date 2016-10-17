@@ -53,6 +53,36 @@ module RongCloud
         assert_equal [], chatrooms
       end
 
+      def test_query_chatroom_users_with_count_1_and_order_1
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+        @service.join_chatroom("user4", 10009)
+
+        users = @service.query_chatroom_users("10009", 1, "1")["users"]
+        user = users.first
+        assert_equal 1, users.count
+        assert_equal "user3", user["id"]
+      end
+
+      def test_query_chatroom_users_with_count_1_and_order_2
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+        @service.join_chatroom("user4", 10009)
+
+        users = @service.query_chatroom_users("10009", 1, "2")["users"]
+        user = users.first
+        assert_equal "user4", user["id"]
+      end
+
+      def test_query_chatroom_users_with_count_2
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+        @service.join_chatroom("user4", 10009)
+
+        users = @service.query_chatroom_users("10009", 2)["users"]
+        assert_equal 2, users.count
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)

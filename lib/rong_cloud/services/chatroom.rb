@@ -37,6 +37,17 @@ module RongCloud
       def query_chatroom(chatroom_ids)
         request("/chatroom/query", chatroomId: chatroom_ids)
       end
+
+
+      # 查询聊天室内用户
+      #
+      # @param chatroom_id [String] 聊天室 id
+      # @param count [String, Fixnum] 要获取的聊天室成员数，上限为 500
+      # @param order [String] 加入聊天室的先后顺序， 1 为加入时间正序， 2 为加入时间倒序
+      #
+      def query_chatroom_users(chatroom_id, count, order = "1")
+        request("chatroom/user/query", chatroomId: chatroom_id, count: count, order: order)
+      end
     end
   end
 end
