@@ -108,6 +108,25 @@ module RongCloud
         assert_equal 200, response["code"]
       end
 
+      def test_chatroom_whitelist_flow
+        create_chatrooms({10011 => "room11"})
+        @service.join_chatroom("user6", 10011)
+
+        response = @service.add_chatroom_whitelist(10011, "user6")
+        assert_equal 200, response["code"]
+        response = @service.add_chatroom_whitelist(10011, ["user7", "user8"])
+        assert_equal 200, response["code"]
+
+        response = @service.whitelisted_chatroom_users(10011)
+        assert_equal 200, response["code"]
+        assert response["users"]
+
+        response = @service.remove_chatroom_whitelist(10011, "user6")
+        assert_equal 200, response["code"]
+        response = @service.remove_chatroom_whitelist(10011, ["user7", "user8"])
+        assert_equal 200, response["code"]
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)
