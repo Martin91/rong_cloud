@@ -65,6 +65,18 @@ module RongCloud
       def query_chatroom_users(chatroom_id, count, order = "1")
         request("chatroom/user/query", chatroomId: chatroom_id, count: count, order: order)
       end
+
+      # 聊天室消息停止分发 http://www.rongcloud.cn/docs/server.html#聊天室消息停止分发_方法
+      #
+      def stop_chatroom_distribution(chatroom_id)
+        request("/chatroom/message/stopDistribution", chatroomId: chatroom_id)
+      end
+
+      # 聊天室消息恢复分发 http://www.rongcloud.cn/docs/server.html#聊天室消息恢复分发_方法
+      #
+      def resume_chatroom_distribution(chatroom_id)
+        request("/chatroom/message/resumeDistribution", chatroomId: chatroom_id)
+      end
     end
   end
 end

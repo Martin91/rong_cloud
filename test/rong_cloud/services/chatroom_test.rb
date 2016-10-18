@@ -98,6 +98,16 @@ module RongCloud
         assert_equal 200, response["code"]
       end
 
+      def test_stop_chatroom_distribution
+        response = @service.stop_chatroom_distribution(10011)
+        assert_equal 200, response["code"]
+      end
+
+      def test_resume_chatroom_distribution
+        response = @service.resume_chatroom_distribution(10011)
+        assert_equal 200, response["code"]
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)
