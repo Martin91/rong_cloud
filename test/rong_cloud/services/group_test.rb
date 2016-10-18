@@ -24,11 +24,9 @@ module RongCloud
       end
 
       def test_create_group_without_group_name
-        error = assert_raises RongCloud::BadRequest do
-          @service.create_group('user1', '5', nil)
-        end
+        response = @service.create_group('user1', '5', nil)
 
-        assert_equal "groupName is required.", error.message
+        assert_equal 200, response["code"]
       end
 
       def test_join_group_with_single_user_id
@@ -49,11 +47,9 @@ module RongCloud
       end
 
       def test_join_group_without_group_name
-        error = assert_raises RongCloud::BadRequest do
-          @service.join_group('user1', '5', nil)
-        end
+        response = @service.join_group('user1', '5', nil)
 
-        assert_equal "groupName is required.", error.message
+        assert_equal 200, response["code"]
       end
 
       def test_quit_group
