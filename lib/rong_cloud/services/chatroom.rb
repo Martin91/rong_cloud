@@ -44,6 +44,18 @@ module RongCloud
         request("/chatroom/user/gag/add", chatroomId: chatroom_id, userId: user_id, minute: minute)
       end
 
+      # 移除封禁聊天室成员 http://www.rongcloud.cn/docs/server.html#移除封禁聊天室成员_方法
+      #
+      def unblock_chatroom_user(chatroom_id, user_id)
+        request("/chatroom/user/block/rollback", chatroomId: chatroom_id, userId: user_id)
+      end
+
+      # 查询被封禁聊天室成员 http://www.rongcloud.cn/docs/server.html#查询被封禁聊天室成员_方法
+      #
+      def blocked_chatroom_users(chatroom_id)
+        request("/chatroom/user/block/list", chatroomId: chatroom_id)
+      end
+
       # 查询聊天室内用户
       #
       # @param chatroom_id [String] 聊天室 id
