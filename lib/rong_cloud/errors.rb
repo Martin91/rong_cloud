@@ -1,6 +1,8 @@
 module RongCloud
   # 不支持的消息类型错误
   class UnsupportedMessageChannelName < ::StandardError;end
+  # 缺少必传参数
+  class MissingOptionError < ::StandardError;end
   # 与融云接口请求相关的基本错误类型，其他错误类型继承此类型
   class RequestError < ::StandardError
     # @!attribute [rw] business_code

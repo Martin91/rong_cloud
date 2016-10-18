@@ -25,7 +25,8 @@ module RongCloud
 
       def test_create_group_without_group_name
         response = @service.create_group('user1', '5', nil)
-        assert_equal 200, response['code']
+
+        assert_equal 200, response["code"]
       end
 
       def test_join_group_with_single_user_id
@@ -47,7 +48,8 @@ module RongCloud
 
       def test_join_group_without_group_name
         response = @service.join_group('user1', '5', nil)
-        assert_equal 200, response['code']
+
+        assert_equal 200, response["code"]
       end
 
       def test_quit_group
@@ -94,7 +96,6 @@ module RongCloud
         response = @service.blocked_group_members('group1')
         user_ids = response['users'].map{|user| user['userId']}
 
-        assert_equal 1, user_ids.count
         assert_includes user_ids, "user2"
       end
     end

@@ -1,5 +1,5 @@
 Gem::Specification.new do |s|
-  s.name         = 'rong_cloud'
+  s.name         = 'rong_cloud_server'
   s.platform     = Gem::Platform::RUBY
   s.require_path = 'lib'
   s.summary      = '融云 Server API SDK'
