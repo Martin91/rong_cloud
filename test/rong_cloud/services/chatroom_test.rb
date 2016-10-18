@@ -83,6 +83,14 @@ module RongCloud
         assert_equal 2, users.count
       end
 
+      def test_block_chatroom_user
+        create_chatrooms({10010 => "room10"})
+        @service.join_chatroom("user5", 10010)
+
+        response = @service.block_chatroom_user(10010, "user5", 60)
+        assert_equal 200, response["code"]
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)

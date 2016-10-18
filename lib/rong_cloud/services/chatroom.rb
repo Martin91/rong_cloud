@@ -38,6 +38,11 @@ module RongCloud
         request("/chatroom/query", chatroomId: chatroom_ids)
       end
 
+      # 添加禁言聊天室成员 http://www.rongcloud.cn/docs/server.html#添加禁言聊天室成员_方法
+      #
+      def block_chatroom_user(chatroom_id, user_id, minute)
+        request("/chatroom/user/gag/add", chatroomId: chatroom_id, userId: user_id, minute: minute)
+      end
 
       # 查询聊天室内用户
       #
