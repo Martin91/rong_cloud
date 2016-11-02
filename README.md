@@ -10,7 +10,7 @@
   ```ruby
   RongCloud.configure do |config|
     config.app_key = "APP_KEY"
-    config.secret_key = "SECRET_KEY"
+    config.app_secret = "SECRET_KEY"
     config.host = "http://api.cn.ronghub.com"   # default: https://api.cn.ronghub.com, use http is convenient for debugging
   end
   ```
