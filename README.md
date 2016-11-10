@@ -4,7 +4,18 @@
 此 gem 实现了[融云 Server API](http://www.rongcloud.cn/docs/server.html)的大部分接口的 Ruby 实现。
 
 ### Getting Started
-1. 安装此 gem；
+1. 安装此 gem：
+  
+  ```ruby
+  $ gem install rong_cloud_server
+  ```
+  
+  or, install in Gemfile:
+  
+  ```ruby
+  gem 'rong_cloud_server', '~> 0.0.2'
+  ```
+
 2. 在项目中添加配置：
 
   ```ruby
