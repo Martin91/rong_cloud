@@ -1,48 +1,50 @@
-融云 Server SDK
+[RongCloud](http://rongcloud.cn/) Server API SDK in Ruby
 ===
 
-此 gem 实现了[融云 Server API](http://www.rongcloud.cn/docs/server.html)的大部分接口的 Ruby 实现。
+To view the README in Chinese, visit [README.zh-CN.md](./README.zh-CN.md)
+
+This repository implements most essential apis for [RongCloud Server API](http://www.rongcloud.cn/docs/server.html) in Ruby programming language.
 
 ### Getting Started
-1. 安装此 gem：
-  
+1. Install the gem:
+
   ```ruby
   $ gem install rong_cloud_server
   ```
-  
-  or, install in Gemfile:
-  
+
+  or, install it in Gemfile:
+
   ```ruby
   gem 'rong_cloud_server', '~> 0.0.2'
   ```
 
-2. 在项目中添加配置：
+2. Append the following configurations in a initializer file:
 
   ```ruby
   RongCloud.configure do |config|
     config.app_key = "APP_KEY"
-    config.app_secret = "SECRET_KEY"
-    config.host = "http://api.cn.ronghub.com"   # default: https://api.cn.ronghub.com, use http is convenient for debugging
+    config.secret_key = "SECRET_KEY"
+    config.host = "http://api.cn.ronghub.com"   # default: https://api.cn.ronghub.com, use http here is just convenient for debugging
   end
   ```
-3. 通过 service 对象使用：
+3. Use the instance of `RongCloud::Service` to talk to RongCloud Server:
 
   ```ruby
   service = RongCloud::Service.new
 
-  # 更多方法，请查看测试用例 https://github.com/Martin91/rong_cloud/tree/master/test/rong_cloud/services
+  # Find more usage from test files under https://github.com/Martin91/rong_cloud/tree/master/test/rong_cloud/services
   service.get_token(..., ..., ...)
   ```
 
-### 特点
-1. **轻量**：无其他依赖；
-2. **简洁**：不过分封装，仅做必要的请求实现，使用方自行处理响应的 JSON 解析后的 Hash 对象，各字段释义请自行查阅融云文档；
-3. **丰富的异常类型**：针对不同的 HTTP 状态码，抛出相对应的异常类型，同时可以通过异常对象的 `business_code` 方法获取错误业务码，可以参考[request test 的代码](https://github.com/Martin91/rong_cloud/blob/master/test/rong_cloud/request_test.rb)。
+### Features
+1. **Lightweight**:No other third-party gems dependences;
+2. **Straight and Simple**:Just wrap api connections in Ruby, no any DSL and so that you do not learn too many new syntax, no any process on response；
+3. **Detailed Exceptions**:Detailed and different exceptions according to the http status code，and you can get the [detailed error code](http://www.rongcloud.cn/docs/server.html#业务返回码), officially defined by RongCloud, through calling the extended method `business_code` on a exception, please refer to [request test](https://github.com/Martin91/rong_cloud/blob/master/test/rong_cloud/request_test.rb).
 
 ### TODOs for v0.1.0
-1. 实时消息路由；
-2. 消息历史记录；
-3. 在线状态订阅。
+1. Realtime messages forwarding;
+2. Historical messages storage;
+3. Online status subscription.
 
 ### How to contribute
 1. Fork this repo;
