@@ -3,17 +3,17 @@ require 'json'
 require 'rong_cloud/signature'
 
 module RongCloud
-  # 请求封装类，所有请求基于 Net::HTTP，自动支持 http 或者 https
+  # Handle api request, based on Ruby's built-in Net::HTTP,
+  # support both HTTP and HTTPS
   #
   module Request
     include Signature
 
-    # 执行请求
-    # @param path [String] 请求 API 的相对路径
-    # @param params [Hash] 请求的参数
-    # @param content_type [Symbol] 请求数据编码格式，:form_data 或者 :json，默认 :form_data
-    # @return [Hash] JSON 解析后的响应数据
-    # @raise [RongCloud::BadRequest] 请求参数有误，缺失或者不正确等，详见官方文档
+    # @param path [String] The api endpoint
+    # @param params [Hash] api params
+    # @param content_type [Symbol] required formatting for request data, :form_data or :json
+    # @return [Hash] the parsed response represented by JSON
+    # @raise [RongCloud::BadRequest] when request params is invalid or other situations
     def request(path, params = nil, content_type = :form_data)
       uri = get_uri(path)
       req = initialize_request(uri, params, content_type)
@@ -26,22 +26,22 @@ module RongCloud
     end
 
     private
-    # 拼接请求的接口的路径
+    # construct the api endpoint url
     #
-    # @param path [String] 接口的相对路径，e.g. "/user/getToken" 或者 "user/getToken"，代码中自动处理开头的斜杠
-    # @return [URI] 请求全路径生成的 URI 对象，自动追加 .json 格式扩展名
+    # @param path [String] the relative path for api endpoint，e.g. "/user/getToken" or "user/getToken"
+    # @return [URI] full url for the endpoint
     #
     def get_uri(path)
       url = "#{RongCloud::Configuration.host}/#{path.gsub(/^\//, "")}"
       URI(url.end_with?(".json") ? url : "#{url}.json")
     end
 
-    # 实例化请求对象
+    # construct a new request
     #
-    # @param uri [URI] 请求路径对象
-    # @param params [Hash] 请求的参数，所有参数通过 form encoded data 方式发送
-    # @param content_type [Symbol] 请求数据编码格式，:form_data 或者 :json
-    # @return [Net::HTTP::Post] 请求的实例
+    # @param uri [URI] the relative path for api endpoint
+    # @param params [Hash] the request params
+    # @param content_type [Symbol] required formatting for request data, :form_data or :json
+    # @return [Net::HTTP::Post] the request object
     #
     def initialize_request(uri, params, content_type)
       req = Net::HTTP::Post.new(uri)
@@ -58,11 +58,11 @@ module RongCloud
       req
     end
 
-    # 解析响应数据，包含错误检测
+    # parse the raw response
     #
-    # @param res [HTTPResponse] 响应结果的实例
-    # @return [Hash] JSON 解析后的响应正文
-    # @raise [RongCloud::BadRequest] 请求参数有误，缺失或者不正确等，详见官方文档
+    # @param res [HTTPResponse] the response
+    # @return [Hash] response data parsed as JSON
+    # @raise [RongCloud::BadRequest] when params are invalid or other situations
     #
     def handle_response(res)
       json = JSON.parse(res.body)
