@@ -8,7 +8,7 @@ This repository implements most essential apis for [RongCloud Server API](http:/
 ### Getting Started
 1. Install the gem:
 
-  ```ruby
+  ```sh
   $ gem install rong_cloud_server
   ```
 
