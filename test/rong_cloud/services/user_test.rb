@@ -1,6 +1,10 @@
+require 'rong_cloud/service_test_setup'
+
 module RongCloud
   module Services
-    module UserTest
+    class UserTest < Minitest::Test
+      include RongCloud::ServiceTestSetup
+
       def test_get_token_without_user_id
         error = assert_raises RongCloud::BadRequest do
           @service.get_token(nil, nil, nil)

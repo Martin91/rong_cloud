@@ -1,6 +1,10 @@
+require 'rong_cloud/service_test_setup'
+
 module RongCloud
   module Services
-    module MessageTest
+    class MessageTest < Minitest::Test
+      include RongCloud::ServiceTestSetup
+
       def test_send_private_message_with_single_to_user_id
         response = @service.send_private_message(1, 2, "RC:TxtMsg", { content: "hello world", extra: "nothing" })
         assert_equal 200, response["code"]

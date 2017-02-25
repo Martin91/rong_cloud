@@ -1,6 +1,10 @@
+require 'rong_cloud/service_test_setup'
+
 module RongCloud
   module Services
-    module WordfilterTest
+    class WordfilterTest < Minitest::Test
+      include RongCloud::ServiceTestSetup
+
       def test_add_wordfilter_with_single_word
         response = @service.add_wordfilter("敏感词")
         assert_equal 200, response["code"]

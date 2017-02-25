@@ -1,6 +1,10 @@
+require 'rong_cloud/service_test_setup'
+
 module RongCloud
   module Services
-    module HistoryMessageTest
+    class HistoryMessageTest < Minitest::Test
+      include RongCloud::ServiceTestSetup
+
       def test_get_history
         date = "2014010101"
         response = @service.get_history(date)

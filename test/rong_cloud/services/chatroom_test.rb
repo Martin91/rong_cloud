@@ -1,6 +1,10 @@
+require 'rong_cloud/service_test_setup'
+
 module RongCloud
   module Services
-    module ChatroomTest
+    class ChatroomTest < Minitest::Test
+      include RongCloud::ServiceTestSetup
+
       def test_create_chatroom
         chatrooms = { 10001 => "name1", 10002 => "name2" }
         response = @service.create_chatroom(chatrooms)
