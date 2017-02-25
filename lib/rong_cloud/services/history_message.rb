@@ -9,6 +9,14 @@ module RongCloud
       def get_history(date)
         request "/message/history", { date: date }
       end
+
+      # Delete all history message whithin specified date and hour
+      #
+      # @param date [String] the date and hour represented in format "YYYYmmddHH"
+      #
+      def delete_history(date)
+        request "/message/history/delete", { date: date }
+      end
     end
   end
 end
