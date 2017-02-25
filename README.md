@@ -41,10 +41,10 @@ This repository implements most essential apis for [RongCloud Server API](http:/
 2. **Straight and Simple**:Just wrap api connections in Ruby, no any DSL and so that you do not learn too many new syntax, no any process on response；
 3. **Detailed Exceptions**:Detailed and different exceptions according to the http status code，and you can get the [detailed error code](http://www.rongcloud.cn/docs/server.html#业务返回码), officially defined by RongCloud, through calling the extended method `business_code` on a exception, please refer to [request test](https://github.com/Martin91/rong_cloud/blob/master/test/rong_cloud/request_test.rb).
 
-### TODOs for v0.1.0
-1. Realtime messages forwarding;
-2. Historical messages storage;
-3. Online status subscription.
+### How to work with Realtime Message Forward or Online Status Subscription
+Just include `RongCloud::Signature` in your codes to validate api signature and then parse params.
+
+More infos about parameters, refer to the [official documents](http://www.rongcloud.cn/docs/server.html#服务端实时消息路由).
 
 ### How to contribute
 1. Fork this repo;
