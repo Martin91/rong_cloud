@@ -3,3 +3,4 @@ rong_cloud.log
 /doc
 .yardoc/
 Gemfile.lock
+coverage/

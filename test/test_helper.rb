@@ -1,7 +1,8 @@
 require 'minitest/autorun'
 require 'byebug'
 require 'rong_cloud'
-require 'yaml'
+require 'coveralls'
+Coveralls.wear!
 
 def rong_cloud_configure_with_settings
   RongCloud.configure do |config|

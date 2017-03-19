@@ -13,4 +13,5 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'minitest', '>= 3'
   s.add_development_dependency 'byebug'
+  s.add_development_dependency 'coveralls'
 end
