@@ -8,7 +8,8 @@ module RongCloud
     DEFAULT_HOST = "https://api.cn.ronghub.com".freeze
 
     module ModuleMethods
-      attr_accessor :app_key, :app_secret, :host, :logger
+      attr_accessor :app_key, :app_secret
+      attr_writer :host, :logger
 
       # Fetch the api host, the default is: https://api.cn.ronghub.com
       #

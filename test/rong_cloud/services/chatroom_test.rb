@@ -46,7 +46,6 @@ module RongCloud
       def test_query_chatroom_with_existed_chatroom_ids
         create_chatrooms({10007 => "room7", 10008 => "room8"})
         chatrooms = @service.query_chatroom(%w(10007 10008))["chatRooms"]
-        chatroom_ids = chatrooms.map{ |chatroom| chatroom["chrmId"] }
         room = chatrooms.detect{ |chatroom| chatroom["chrmId"] == "10007" }
         assert_equal 2, chatrooms.count
         assert_equal "room7", room["name"]
