@@ -2,3 +2,4 @@
 rong_cloud.log
 /doc
 .yardoc/
+gemfiles/*.gemfile.lock
