@@ -1,14 +1,15 @@
-require 'minitest/autorun'
-require 'byebug'
-require 'rong_cloud'
 require 'simplecov'
 require 'coveralls'
 
-SimpleCov.start do
-  add_filter "/test/"
-end
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start
 
-Coveralls.wear!
+require 'minitest/autorun'
+require 'byebug'
+require 'rong_cloud'
 
 def rong_cloud_configure_with_settings
   RongCloud.configure do |config|

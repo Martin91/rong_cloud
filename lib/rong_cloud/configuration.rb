@@ -9,21 +9,12 @@ module RongCloud
 
     module ModuleMethods
       attr_accessor :app_key, :app_secret
-      attr_writer :host, :logger
+      attr_writer :host
 
       # Fetch the api host, the default is: https://api.cn.ronghub.com
       #
       def host
         @host || DEFAULT_HOST
-      end
-
-      # Fetch the logger, the default is STDOUT
-      def logger
-        @logger || default_logger
-      end
-
-      def default_logger
-        @default_logger ||= ::Logger.new(STDOUT)
       end
     end
     extend ModuleMethods
