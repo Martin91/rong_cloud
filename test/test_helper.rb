@@ -1,11 +1,15 @@
-require 'simplecov'
-require 'coveralls'
+begin
+  require 'simplecov'
+  require 'coveralls'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
-SimpleCov.start
+  SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+    SimpleCov::Formatter::HTMLFormatter,
+    Coveralls::SimpleCov::Formatter
+  ]
+  SimpleCov.start
+rescue LoadError => e
+  warn e.message
+end
 
 require 'minitest/autorun'
 require 'byebug'
