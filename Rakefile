@@ -1,4 +1,9 @@
-desc "Default: run unit tests"
-task :default do
-  exec "echo \"Dir.glob('./test/**/*_test.rb').each { |file| require file}\" | ruby -Itest -Ilib"
+require "bundler/gem_tasks"
+require 'rake/testtask'
+
+Rake::TestTask.new do |t|
+  t.libs = ["test"]
+  t.pattern = "test/**/*_test.rb"
+
 end
+task :default => :test
