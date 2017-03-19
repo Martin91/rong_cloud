@@ -1,7 +1,13 @@
 require 'minitest/autorun'
 require 'byebug'
 require 'rong_cloud'
+require 'simplecov'
 require 'coveralls'
+
+SimpleCov.start do
+  add_filter "/test/"
+end
+
 Coveralls.wear!
 
 def rong_cloud_configure_with_settings
