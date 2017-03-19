@@ -3,12 +3,10 @@ require 'byebug'
 require 'rong_cloud'
 require 'yaml'
 
-$settings = YAML.load_file("./config.yml")
-
 def rong_cloud_configure_with_settings
   RongCloud.configure do |config|
-    $settings.each do |setting, value|
-      config.send("#{setting}=", value)
-    end
+    config.app_key = ENV["RONGCLOUD_APP_KEY"]
+    config.app_secret = ENV["RONGCLOUD_APP_SECRET"]
+    config.host = ENV["RONGCLOUD_API_HOST"] || "https://api.cn.ronghub.com"
   end
 end
