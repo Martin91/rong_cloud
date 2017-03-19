@@ -10,4 +10,7 @@ Gem::Specification.new do |s|
   s.email        = 'hongzeqin@gmail.com'
   s.homepage     = 'http://blog.hackerpie.com/rong_cloud/'
   s.license      = 'MIT'
+
+  s.add_development_dependency 'minitest', '>= 3'
+  s.add_development_dependency 'byebug'
 end
