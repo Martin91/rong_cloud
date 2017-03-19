@@ -23,6 +23,8 @@ This repository implements most essential apis for [RongCloud Server API](http:/
 2. Append the following configurations in a initializer file:
 
   ```ruby
+  require 'rong_cloud'
+
   RongCloud.configure do |config|
     config.app_key = "APP_KEY"
     config.app_secret = "SECRET_KEY"
