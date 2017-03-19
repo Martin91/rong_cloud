@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.summary      = 'RongCloud Server API SDK'
   s.description  = 'RongCloud Server API in Ruby，http://www.rongcloud.cn/docs/server.html'
-  s.version      = '0.1.0'
+  s.version      = '0.1.1'
   s.files        = `git ls-files`.split("\n")
   s.authors      = ['Martin Hong']
   s.email        = 'hongzeqin@gmail.com'

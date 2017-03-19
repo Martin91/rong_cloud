@@ -17,7 +17,7 @@ This repository implements most essential apis for [RongCloud Server API](http:/
   or, install it in Gemfile:
 
   ```ruby
-  gem 'rong_cloud_server', '~> 0.0.2'
+  gem 'rong_cloud_server'
   ```
 
 2. Append the following configurations in a initializer file:
