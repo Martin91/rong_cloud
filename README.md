@@ -3,8 +3,6 @@
 [![Build Status](https://travis-ci.org/Martin91/rong_cloud.svg?branch=master)](https://travis-ci.org/Martin91/rong_cloud)
 [![Coverage Status](https://coveralls.io/repos/github/Martin91/rong_cloud/badge.svg?branch=master)](https://coveralls.io/github/Martin91/rong_cloud?branch=master)
 
-To view the README in Chinese, visit [README.zh-CN.md](./README.zh-CN.md)
-
 This repository implements most essential apis for [RongCloud Server API](http://www.rongcloud.cn/docs/server.html) in Ruby programming language.
 
 ### Getting Started
