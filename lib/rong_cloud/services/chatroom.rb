@@ -136,6 +136,21 @@ module RongCloud
       def blocked_chatroom_users(chatroom_id)
         request("/chatroom/user/block/list", chatroomId: chatroom_id)
       end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_keepalive_add
+      def add_keepalive_chatroom(chatroom_id)
+        request("/chatroom/keepalive/add", chatroomId: chatroom_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_keepalive_remove
+      def remove_keepalive_chatroom(chatroom_id)
+        request("/chatroom/keepalive/remove", chatroomId: chatroom_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_keepalive_query
+      def keepalive_chatrooms
+        request("/chatroom/keepalive/query")
+      end
     end
   end
 end

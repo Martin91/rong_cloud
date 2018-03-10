@@ -204,6 +204,33 @@ module RongCloud
         refute response["users"].detect{ |u| u["userId"] == "user5" }
       end
 
+      def test_add_keepalive_chatroom
+        error = assert_raises RongCloud::RequestError do
+          @service.add_keepalive_chatroom(10011)
+        end
+
+        assert_equal "聊天室保活服务未开通。", error.message
+        assert_equal 1009, error.business_code
+      end
+
+      def test_remove_keepalive_chatroom
+        error = assert_raises RongCloud::RequestError do
+          @service.remove_keepalive_chatroom(10011)
+        end
+
+        assert_equal "聊天室保活服务未开通。", error.message
+        assert_equal 1009, error.business_code
+      end
+
+      def test_keepalive_chatrooms
+        error = assert_raises RongCloud::RequestError do
+          @service.keepalive_chatrooms
+        end
+
+        assert_equal "聊天室保活服务未开通。", error.message
+        assert_equal 1009, error.business_code
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)
