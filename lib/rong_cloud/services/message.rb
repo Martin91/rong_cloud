@@ -2,7 +2,7 @@ require 'rong_cloud/services/message/message_channel'
 
 module RongCloud
   module Services
-    # http://www.rongcloud.cn/docs/server.html#消息发送服务
+    # http://www.rongcloud.cn/docs/server.html#message
     module Message
       # General method to send messages
       # @param from_user_id [String] sender id
@@ -14,6 +14,7 @@ module RongCloud
       # @option content [Object] :content the body of message
       # @option content [Object] :extra the extras of message，passed as a string
       #   and should be parsed by the message consumer
+      # @option content [Object] :user the informations for user, see: http://www.rongcloud.cn/docs/server.html#user_info
       # @param args [Array] additional params，when it includes only one param,
       #   the args is a options; when 2 params, the first one is the `values` of
       #   a template message, the the last one is a options
@@ -21,6 +22,8 @@ module RongCloud
       #   total supported options determined by the message type
       # @option options [String] :pushContent push content
       # @option options [Hash] :pushData push data as payload
+      # @option options [Hash] :verifyBlacklist verify sender's blacklist
+      # @option options [Hash] :contentAvailable for iOS devices, see docs for more details
       #
       def send_message(from_user_id, target_id, channel_name, object_name, content, *args)
         options = args.extract_options!
