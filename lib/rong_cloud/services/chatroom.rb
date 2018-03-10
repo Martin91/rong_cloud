@@ -47,22 +47,22 @@ module RongCloud
         request("/chatroom/users/exist", chatroomId: chatroom_id, userId: user_id)
       end
 
-      # http://www.rongcloud.cn/docs/server.html#添加禁言聊天室成员_方法
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_add
       #
       def block_chatroom_user(chatroom_id, user_id, minute)
         request("/chatroom/user/gag/add", chatroomId: chatroom_id, userId: user_id, minute: minute)
       end
 
-      # http://www.rongcloud.cn/docs/server.html#移除封禁聊天室成员_方法
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_rollback
       #
       def unblock_chatroom_user(chatroom_id, user_id)
-        request("/chatroom/user/block/rollback", chatroomId: chatroom_id, userId: user_id)
+        request("/chatroom/user/gag/rollback", chatroomId: chatroom_id, userId: user_id)
       end
 
-      # http://www.rongcloud.cn/docs/server.html#查询被封禁聊天室成员_方法
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_list
       #
       def blocked_chatroom_users(chatroom_id)
-        request("/chatroom/user/block/list", chatroomId: chatroom_id)
+        request("/chatroom/user/gag/list", chatroomId: chatroom_id)
       end
 
       # Fetch members list in a specified chatroom
