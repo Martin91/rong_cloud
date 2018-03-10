@@ -1,7 +1,9 @@
 module RongCloud
   module Services
-    # http://www.rongcloud.cn/docs/server.html#群组服务
+    # http://www.rongcloud.cn/docs/server.html#group
     module Group
+      # @param user_id [String] user id
+      # @param groups [Hash] store group id as hash key, while group name as value, e.g. { 132 => "欢天喜地一家亲" }
       def sync_group(user_id, groups)
         params = {userId: user_id}
         groups.each do |id, name|

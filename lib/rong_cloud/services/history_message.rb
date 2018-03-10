@@ -1,6 +1,6 @@
 module RongCloud
   module Services
-    # http://www.rongcloud.cn/docs/server.html#消息历史记录服务
+    # http://www.rongcloud.cn/docs/server.html#history_message
     module HistoryMessage
       # Get the download url for history messages within specified hour
       #
