@@ -6,7 +6,7 @@ module RongCloud
   class RequestError < ::StandardError
     # @!attribute [rw] business_code
     #   extended attribute, recording the return codes defined by RongCloud,
-    #   View http://www.rongcloud.cn/docs/server.html#API_方法返回值说明
+    #   refer to: http://www.rongcloud.cn/docs/server.html#api_code
     attr_accessor :business_code
   end
 
@@ -20,6 +20,8 @@ module RongCloud
   class InternalServerError < RequestError;end
   class Timeout < RequestError;end
 
+  # http://www.rongcloud.cn/docs/server.html#api
+  # API 返回值
   HTTP_CODE_TO_ERRORS_MAP = {
     "400" => BadRequest,
     "401" => AuthenticationFailed,
