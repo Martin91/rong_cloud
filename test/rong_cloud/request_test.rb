@@ -52,5 +52,17 @@ module RongCloud
       assert_equal "user", response["userId"]
       assert response["token"]
     end
+
+    def test_request_with_timeout_set
+      original_timeout = RongCloud::Configuration.timeout
+      RongCloud::Configuration.timeout = 0.001
+
+      service = RongCloud::Service.new
+      assert_raises Net::OpenTimeout do
+        response = request("/user/getToken", { userId: 'user', name: "User", portraitUri: "uri" })
+      end
+
+      RongCloud::Configuration.timeout = original_timeout
+    end
   end
 end

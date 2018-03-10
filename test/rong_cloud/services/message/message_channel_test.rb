@@ -13,8 +13,7 @@ module RongCloud
           error = assert_raises RongCloud::UnsupportedMessageChannelName do
             RongCloud::Services::Message::MessageChannel.new(:nothing)
           end
-          expected_error = "support only channels: [\"private\", \"private_template\", \"system\", \"system_template\", \"group\", \"discussion\", \"chatroom\", \"broadcast\"]"
-          assert_equal expected_error, error.message
+          assert error.message =~ /^support\sonly\schannels:/
         end
 
         def test_target_param_name_for_private

@@ -39,22 +39,30 @@ module RongCloud
         request("/chatroom/query", chatroomId: chatroom_ids)
       end
 
-      # http://www.rongcloud.cn/docs/server.html#添加禁言聊天室成员_方法
+      def query_chatroom_user_existence(chatroom_id, user_id)
+        request("/chatroom/user/exist", chatroomId: chatroom_id, userId: user_id)
+      end
+
+      def query_chatroom_users_existence(chatroom_id, user_id)
+        request("/chatroom/users/exist", chatroomId: chatroom_id, userId: user_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_add
       #
-      def block_chatroom_user(chatroom_id, user_id, minute)
+      def add_chatroom_gag_user(chatroom_id, user_id, minute)
         request("/chatroom/user/gag/add", chatroomId: chatroom_id, userId: user_id, minute: minute)
       end
 
-      # http://www.rongcloud.cn/docs/server.html#移除封禁聊天室成员_方法
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_rollback
       #
-      def unblock_chatroom_user(chatroom_id, user_id)
-        request("/chatroom/user/block/rollback", chatroomId: chatroom_id, userId: user_id)
+      def rollback_chatroom_gag_user(chatroom_id, user_id)
+        request("/chatroom/user/gag/rollback", chatroomId: chatroom_id, userId: user_id)
       end
 
-      # http://www.rongcloud.cn/docs/server.html#查询被封禁聊天室成员_方法
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_list
       #
-      def blocked_chatroom_users(chatroom_id)
-        request("/chatroom/user/block/list", chatroomId: chatroom_id)
+      def chatroom_gag_users(chatroom_id)
+        request("/chatroom/user/gag/list", chatroomId: chatroom_id)
       end
 
       # Fetch members list in a specified chatroom
@@ -94,6 +102,54 @@ module RongCloud
       # http://www.rongcloud.cn/docs/server.html#查询聊天室白名单成员_方法
       def whitelisted_chatroom_users(chatroom_id)
         request("/chatroom/user/whitelist/query", chatroomId: chatroom_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_ban
+      def ban_chatroom_user(user_id, minute)
+        request("/chatroom/user/ban/add", userId: user_id, minute: minute)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_ban_remove
+      def unban_chatroom_user(user_id)
+        request("/chatroom/user/ban/remove", userId: user_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_ban_query
+      def banned_chatroom_users
+        request("/chatroom/user/ban/query")
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_block_add
+      #
+      def block_chatroom_user(chatroom_id, user_id, minute)
+        request("/chatroom/user/block/add", chatroomId: chatroom_id, userId: user_id, minute: minute)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_block_rollback
+      #
+      def unblock_chatroom_user(chatroom_id, user_id)
+        request("/chatroom/user/block/rollback", chatroomId: chatroom_id, userId: user_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_block_list
+      #
+      def blocked_chatroom_users(chatroom_id)
+        request("/chatroom/user/block/list", chatroomId: chatroom_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_keepalive_add
+      def add_keepalive_chatroom(chatroom_id)
+        request("/chatroom/keepalive/add", chatroomId: chatroom_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_keepalive_remove
+      def remove_keepalive_chatroom(chatroom_id)
+        request("/chatroom/keepalive/remove", chatroomId: chatroom_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_keepalive_query
+      def keepalive_chatrooms
+        request("/chatroom/keepalive/query")
       end
     end
   end

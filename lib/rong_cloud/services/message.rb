@@ -70,6 +70,14 @@ module RongCloud
         send_message(from_user_id, to_discussion_id, :discussion, object_name, content, options)
       end
 
+      def send_chatroom_message(from_user_id, to_chatroom_id, object_name, content, options = {})
+        send_message(from_user_id, to_chatroom_id, :chatroom, object_name, content, options)
+      end
+
+      def send_chatroom_broadcast_message(from_user_id, object_name, content, options = {})
+        send_message(from_user_id, nil, :chatroom_broadcast, object_name, content, options)
+      end
+
       def send_broadcast_message(from_user_id, object_name, content, options = {})
         send_message(from_user_id, nil, :broadcast, object_name, content, options)
       end

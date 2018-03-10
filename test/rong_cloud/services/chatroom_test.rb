@@ -86,18 +86,48 @@ module RongCloud
         assert_equal 2, users.count
       end
 
-      def test_block_chatroom_user_flow
+      def test_query_chatroom_user_existence_for_existed_user
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+
+        response = @service.query_chatroom_user_existence("10009", "user3")
+        assert response["isInChrm"]
+      end
+
+      def test_query_chatroom_user_existence_for_unexisted_user
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+
+        response = @service.query_chatroom_user_existence("10009", "unexisted_user_id")
+        refute response["isInChrm"]
+      end
+
+      def test_query_chatroom_users_existence
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+
+        response = @service.query_chatroom_users_existence("10009", ["user3", "unexisted_user_id"])
+        result = response["result"]
+
+        user3_result = result.detect{ |r| r["userId"] == "user3" }
+        assert_equal 1, user3_result["isInChrm"]
+
+        unexisted_user_result = result.detect{ |r| r["userId"] == "unexisted_user_id" }
+        assert_equal 0, unexisted_user_result["isInChrm"]
+      end
+
+      def test_gag_chatroom_user_flow
         create_chatrooms({10010 => "room10"})
         @service.join_chatroom("user5", 10010)
 
-        response = @service.block_chatroom_user(10010, "user5", 60)
+        response = @service.add_chatroom_gag_user(10010, "user5", 60)
         assert_equal 200, response["code"]
 
-        response = @service.blocked_chatroom_users(10010)
+        response = @service.chatroom_gag_users(10010)
         assert_equal 200, response["code"]
         assert response["users"]
 
-        response = @service.unblock_chatroom_user(10010, "user5")
+        response = @service.rollback_chatroom_gag_user(10010, "user5")
         assert_equal 200, response["code"]
       end
 
@@ -128,6 +158,77 @@ module RongCloud
         assert_equal 200, response["code"]
         response = @service.remove_chatroom_whitelist(10011, ["user7", "user8"])
         assert_equal 200, response["code"]
+      end
+
+      def test_ban_chatroom_user
+        error = assert_raises RongCloud::RequestError do
+          @service.ban_chatroom_user(1, 60)
+        end
+
+        # 聊天室全局禁言功能未开通。
+        assert_equal 1009, error.business_code
+      end
+
+      def test_unban_chatroom_user
+        error = assert_raises RongCloud::RequestError do
+          @service.unban_chatroom_user(1)
+        end
+
+        # 聊天室全局禁言功能未开通。
+        assert_equal 1009, error.business_code
+      end
+
+      def test_banned_chatroom_users
+        error = assert_raises RongCloud::RequestError do
+          @service.banned_chatroom_users
+        end
+
+        # 聊天室全局禁言功能未开通。
+        assert_equal 1009, error.business_code
+      end
+
+      def test_block_chatroom_user_flow
+        create_chatrooms({10010 => "room10"})
+        @service.join_chatroom("user5", 10010)
+
+        response = @service.block_chatroom_user(10010, "user5", 60)
+        assert_equal 200, response["code"]
+
+        response = @service.blocked_chatroom_users(10010)
+        assert response["users"].detect{ |u| u["userId"] == "user5" }
+
+        response = @service.unblock_chatroom_user(10010, "user5")
+        assert_equal 200, response["code"]
+
+        response = @service.blocked_chatroom_users(10010)
+        refute response["users"].detect{ |u| u["userId"] == "user5" }
+      end
+
+      def test_add_keepalive_chatroom
+        error = assert_raises RongCloud::RequestError do
+          @service.add_keepalive_chatroom(10011)
+        end
+
+        assert_equal "聊天室保活服务未开通。", error.message
+        assert_equal 1009, error.business_code
+      end
+
+      def test_remove_keepalive_chatroom
+        error = assert_raises RongCloud::RequestError do
+          @service.remove_keepalive_chatroom(10011)
+        end
+
+        assert_equal "聊天室保活服务未开通。", error.message
+        assert_equal 1009, error.business_code
+      end
+
+      def test_keepalive_chatrooms
+        error = assert_raises RongCloud::RequestError do
+          @service.keepalive_chatrooms
+        end
+
+        assert_equal "聊天室保活服务未开通。", error.message
+        assert_equal 1009, error.business_code
       end
 
       private
