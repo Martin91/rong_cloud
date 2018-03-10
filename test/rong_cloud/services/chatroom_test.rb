@@ -86,6 +86,36 @@ module RongCloud
         assert_equal 2, users.count
       end
 
+      def test_query_chatroom_user_existence_for_existed_user
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+
+        response = @service.query_chatroom_user_existence("10009", "user3")
+        assert response["isInChrm"]
+      end
+
+      def test_query_chatroom_user_existence_for_unexisted_user
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+
+        response = @service.query_chatroom_user_existence("10009", "unexisted_user_id")
+        refute response["isInChrm"]
+      end
+
+      def test_query_chatroom_users_existence
+        create_chatrooms({10009 => "room9"})
+        @service.join_chatroom("user3", 10009)
+
+        response = @service.query_chatroom_users_existence("10009", ["user3", "unexisted_user_id"])
+        result = response["result"]
+
+        user3_result = result.detect{ |r| r["userId"] == "user3" }
+        assert_equal 1, user3_result["isInChrm"]
+
+        unexisted_user_result = result.detect{ |r| r["userId"] == "unexisted_user_id" }
+        assert_equal 0, unexisted_user_result["isInChrm"]
+      end
+
       def test_block_chatroom_user_flow
         create_chatrooms({10010 => "room10"})
         @service.join_chatroom("user5", 10010)

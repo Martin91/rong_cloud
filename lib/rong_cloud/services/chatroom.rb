@@ -39,6 +39,14 @@ module RongCloud
         request("/chatroom/query", chatroomId: chatroom_ids)
       end
 
+      def query_chatroom_user_existence(chatroom_id, user_id)
+        request("/chatroom/user/exist", chatroomId: chatroom_id, userId: user_id)
+      end
+
+      def query_chatroom_users_existence(chatroom_id, user_id)
+        request("/chatroom/users/exist", chatroomId: chatroom_id, userId: user_id)
+      end
+
       # http://www.rongcloud.cn/docs/server.html#添加禁言聊天室成员_方法
       #
       def block_chatroom_user(chatroom_id, user_id, minute)
