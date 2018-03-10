@@ -15,6 +15,18 @@ module RongCloud
       def chatroom_message_priorities
         request("/chatroom/message/priority/query")
       end
+
+      def add_chatroom_message_whitelist(object_names)
+        request("/chatroom/whitelist/add", objectnames: object_names)
+      end
+
+      def remove_chatroom_message_whitelist(object_names)
+        request("/chatroom/whitelist/delete", objectnames: object_names)
+      end
+
+      def chatroom_message_whitelist
+        request("/chatroom/whitelist/query")
+      end
     end
   end
 end

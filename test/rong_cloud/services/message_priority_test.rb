@@ -5,7 +5,7 @@ module RongCloud
     class MessagePriorityTest < Minitest::Test
       include RongCloud::ServiceTestSetup
 
-      def test_add_message_priority_flow
+      def test_chatroom_message_priority_flow
         response = @service.add_chatroom_message_priority("RC:CmdMsg")
         assert_equal 200, response["code"]
 
@@ -23,6 +23,26 @@ module RongCloud
 
         response = @service.chatroom_message_priorities
         assert_empty response["objectNames"]
+      end
+
+      def test_chatroom_message_whitelist_flow
+        response = @service.add_chatroom_message_whitelist("RC:TxtMsg")
+        assert_equal 200, response["code"]
+
+        response = @service.add_chatroom_message_whitelist(["RC:ImgMsg", "RC:LBSMsg"])
+        assert_equal 200, response["code"]
+
+        response = @service.chatroom_message_whitelist
+        assert_equal ["RC:TxtMsg", "RC:ImgMsg", "RC:LBSMsg"].sort, response["whitlistMsgType"].sort
+
+        response = @service.remove_chatroom_message_whitelist(["RC:ImgMsg", "RC:LBSMsg"])
+        assert_equal 200, response["code"]
+
+        response = @service.remove_chatroom_message_whitelist("RC:TxtMsg")
+        assert_equal 200, response["code"]
+
+        response = @service.chatroom_message_whitelist
+        assert_equal [""], response["whitlistMsgType"]
       end
     end
   end
