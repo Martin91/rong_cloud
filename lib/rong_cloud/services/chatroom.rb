@@ -49,19 +49,19 @@ module RongCloud
 
       # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_add
       #
-      def block_chatroom_user(chatroom_id, user_id, minute)
+      def add_chatroom_gag_user(chatroom_id, user_id, minute)
         request("/chatroom/user/gag/add", chatroomId: chatroom_id, userId: user_id, minute: minute)
       end
 
       # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_rollback
       #
-      def unblock_chatroom_user(chatroom_id, user_id)
+      def rollback_chatroom_gag_user(chatroom_id, user_id)
         request("/chatroom/user/gag/rollback", chatroomId: chatroom_id, userId: user_id)
       end
 
       # http://www.rongcloud.cn/docs/server.html#chatroom_user_gag_list
       #
-      def blocked_chatroom_users(chatroom_id)
+      def chatroom_gag_users(chatroom_id)
         request("/chatroom/user/gag/list", chatroomId: chatroom_id)
       end
 

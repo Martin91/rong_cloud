@@ -116,18 +116,18 @@ module RongCloud
         assert_equal 0, unexisted_user_result["isInChrm"]
       end
 
-      def test_block_chatroom_user_flow
+      def test_gag_chatroom_user_flow
         create_chatrooms({10010 => "room10"})
         @service.join_chatroom("user5", 10010)
 
-        response = @service.block_chatroom_user(10010, "user5", 60)
+        response = @service.add_chatroom_gag_user(10010, "user5", 60)
         assert_equal 200, response["code"]
 
-        response = @service.blocked_chatroom_users(10010)
+        response = @service.chatroom_gag_users(10010)
         assert_equal 200, response["code"]
         assert response["users"]
 
-        response = @service.unblock_chatroom_user(10010, "user5")
+        response = @service.rollback_chatroom_gag_user(10010, "user5")
         assert_equal 200, response["code"]
       end
 
