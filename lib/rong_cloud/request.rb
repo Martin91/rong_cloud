@@ -17,8 +17,12 @@ module RongCloud
     def request(path, params = nil, content_type = :form_data)
       uri = get_uri(path)
       req = initialize_request(uri, params, content_type)
+
       use_ssl = uri.scheme == 'https'
-      res = Net::HTTP.start(uri.hostname, uri.port, use_ssl: use_ssl) do |http|
+      timeout = RongCloud::Configuration.timeout
+      request_options = { use_ssl: use_ssl, open_timeout: timeout, read_timeout: timeout }
+
+      res = Net::HTTP.start(uri.hostname, uri.port, request_options) do |http|
         http.request(req)
       end
 
