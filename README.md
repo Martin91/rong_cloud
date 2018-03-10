@@ -48,6 +48,11 @@ Just include `RongCloud::Signature` in your codes to validate api signature and 
 
 More infos about parameters, refer to the [official documents](http://www.rongcloud.cn/docs/server.html#服务端实时消息路由).
 
+### Run tests
+```sh
+ruby -Ilib -Itest -e 'ARGV.each { |f| require f }' ./test/**/*_test.rb
+```
+
 ### How to contribute
 1. Fork this repo;
 2. Write your code and test;

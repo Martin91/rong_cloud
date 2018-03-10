@@ -18,7 +18,7 @@ module RongCloud
 
       def test_delete_unexist_wordfilter
         response = @service.delete_wordfilter("unexistedWord")
-        assert_equal 500, response["code"]  # TODO: 500 非期待，后边修复
+        assert_equal 200, response["code"]
       end
 
       def test_wordfilter_list

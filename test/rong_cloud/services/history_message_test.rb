@@ -16,7 +16,7 @@ module RongCloud
       def test_delete_history
         date = "2014010101"
         response = @service.delete_history(date)
-        assert_equal 200, response['code']
+        assert_equal 1015, response['code']
       end
     end
   end
