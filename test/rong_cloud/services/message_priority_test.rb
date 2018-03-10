@@ -33,7 +33,8 @@ module RongCloud
         assert_equal 200, response["code"]
 
         response = @service.chatroom_message_whitelist
-        assert_equal ["RC:TxtMsg", "RC:ImgMsg", "RC:LBSMsg"].sort, response["whitlistMsgType"].sort
+        whitelist = response["whitlistMsgType"].sort.select{ |i| !i.empty? }
+        assert_equal ["RC:TxtMsg", "RC:ImgMsg", "RC:LBSMsg"].sort, whitelist
 
         response = @service.remove_chatroom_message_whitelist(["RC:ImgMsg", "RC:LBSMsg"])
         assert_equal 200, response["code"]
