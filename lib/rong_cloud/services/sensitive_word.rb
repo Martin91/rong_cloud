@@ -17,6 +17,10 @@ module RongCloud
       end
       alias_method :delete_wordfilter, :delete_sensitive_word
 
+      def batch_delete_sensitive_word(words)
+        request("/sensitiveword/batch/delete", words: [*words])
+      end
+
       def sensitive_word_list
         request("/sensitiveword/list")
       end

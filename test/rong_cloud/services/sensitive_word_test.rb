@@ -26,6 +26,11 @@ module RongCloud
         assert_equal 200, response["code"]
       end
 
+      def test_batch_delete_sensitive_word
+        response = @service.batch_delete_sensitive_word(["hello", "敏感词"])
+        assert_equal 200, response["code"]
+      end
+
       def test_sensitive_word_list
         @service.add_sensitive_word("乱")
         response = @service.sensitive_word_list
