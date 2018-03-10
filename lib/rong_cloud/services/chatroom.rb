@@ -118,6 +118,24 @@ module RongCloud
       def banned_chatroom_users
         request("/chatroom/user/ban/query")
       end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_block_add
+      #
+      def block_chatroom_user(chatroom_id, user_id, minute)
+        request("/chatroom/user/block/add", chatroomId: chatroom_id, userId: user_id, minute: minute)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_block_rollback
+      #
+      def unblock_chatroom_user(chatroom_id, user_id)
+        request("/chatroom/user/block/rollback", chatroomId: chatroom_id, userId: user_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_block_list
+      #
+      def blocked_chatroom_users(chatroom_id)
+        request("/chatroom/user/block/list", chatroomId: chatroom_id)
+      end
     end
   end
 end

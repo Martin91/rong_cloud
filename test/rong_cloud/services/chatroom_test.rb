@@ -187,6 +187,23 @@ module RongCloud
         assert_equal 1009, error.business_code
       end
 
+      def test_block_chatroom_user_flow
+        create_chatrooms({10010 => "room10"})
+        @service.join_chatroom("user5", 10010)
+
+        response = @service.block_chatroom_user(10010, "user5", 60)
+        assert_equal 200, response["code"]
+
+        response = @service.blocked_chatroom_users(10010)
+        assert response["users"].detect{ |u| u["userId"] == "user5" }
+
+        response = @service.unblock_chatroom_user(10010, "user5")
+        assert_equal 200, response["code"]
+
+        response = @service.blocked_chatroom_users(10010)
+        refute response["users"].detect{ |u| u["userId"] == "user5" }
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)
