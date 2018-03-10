@@ -103,6 +103,21 @@ module RongCloud
       def whitelisted_chatroom_users(chatroom_id)
         request("/chatroom/user/whitelist/query", chatroomId: chatroom_id)
       end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_ban
+      def ban_chatroom_user(user_id, minute)
+        request("/chatroom/user/ban/add", userId: user_id, minute: minute)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_ban_remove
+      def unban_chatroom_user(user_id)
+        request("/chatroom/user/ban/remove", userId: user_id)
+      end
+
+      # http://www.rongcloud.cn/docs/server.html#chatroom_user_ban_query
+      def banned_chatroom_users
+        request("/chatroom/user/ban/query")
+      end
     end
   end
 end

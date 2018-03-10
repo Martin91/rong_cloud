@@ -160,6 +160,33 @@ module RongCloud
         assert_equal 200, response["code"]
       end
 
+      def test_ban_chatroom_user
+        error = assert_raises RongCloud::RequestError do
+          @service.ban_chatroom_user(1, 60)
+        end
+
+        # 聊天室全局禁言功能未开通。
+        assert_equal 1009, error.business_code
+      end
+
+      def test_unban_chatroom_user
+        error = assert_raises RongCloud::RequestError do
+          @service.unban_chatroom_user(1)
+        end
+
+        # 聊天室全局禁言功能未开通。
+        assert_equal 1009, error.business_code
+      end
+
+      def test_banned_chatroom_users
+        error = assert_raises RongCloud::RequestError do
+          @service.banned_chatroom_users
+        end
+
+        # 聊天室全局禁言功能未开通。
+        assert_equal 1009, error.business_code
+      end
+
       private
       def create_chatrooms(chatrooms = { 10000001 => "super chatroom"})
         @service.create_chatroom(chatrooms)
