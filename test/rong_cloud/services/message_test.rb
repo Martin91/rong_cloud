@@ -118,6 +118,24 @@ module RongCloud
         assert_equal 200, response["code"]
       end
 
+      def test_send_chatroom_message_with_single_to_chatroom_id
+        response = @service.send_chatroom_message(1, 2, "RC:TxtMsg", { content: "hello world", extra: "nothing" })
+        assert_equal 200, response["code"]
+      end
+
+      def test_send_chatroom_message_with_multiple_to_chatroom_ids
+        response = @service.send_chatroom_message(1, [2, 3, 4], "RC:TxtMsg", { content: "hello world", extra: "nothing" })
+        assert_equal 200, response["code"]
+      end
+
+      def test_send_chatroom_broadcast_message
+        error = assert_raises RongCloud::RequestError do
+          @service.send_chatroom_broadcast_message(1, "RC:TxtMsg", { content: "hello world", extra: "nothing" })
+        end
+        # 未开通该服务，请到开发者管理后台开通或提交工单申请。
+        assert_equal 1009, error.business_code
+      end
+
       def test_send_broadcast_message
         response = @service.send_broadcast_message(1, "RC:TxtMsg", { content: "hello world", extra: "nothing" })
         assert_equal 200, response["code"]

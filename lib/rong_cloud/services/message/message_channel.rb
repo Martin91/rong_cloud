@@ -13,6 +13,7 @@ module RongCloud
           group: { target_param_name: 'toGroupId', api_path: "/message/group/publish" },
           discussion: { target_param_name: "toDiscussionId", api_path: "/message/discussion/publish" },
           chatroom: { target_param_name: "toChatroomId", api_path: "/message/chatroom/publish" },
+          chatroom_broadcast: { api_path: "/message/chatroom/broadcast" },
           broadcast: { api_path: "/message/broadcast" }
         }.freeze
         # 支持的消息渠道的列表
