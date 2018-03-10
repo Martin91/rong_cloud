@@ -6,7 +6,7 @@ module RongCloud
         # 各消息渠道各自对应请求路径以及特殊参数名
         #
         CHANNEL_TO_REQUEST_DETAILS_MAP = {
-          'private': { target_param_name: "toUserId", api_path: "/message/private/publish" },
+          private: { target_param_name: "toUserId", api_path: "/message/private/publish" },
           private_template: { target_param_name: "toUserId", api_path: "/message/private/publish_template" },
           system: { target_param_name: "toUserId", api_path: "/message/system/publish" },
           system_template: { target_param_name: "toUserId", api_path: "/message/system/publish_template" },
