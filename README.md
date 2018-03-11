@@ -60,6 +60,3 @@ ruby -Ilib -Itest -e 'ARGV.each { |f| require f }' ./test/**/*_test.rb
 1. Fork this repo;
 2. Write your code and test;
 3. Open a new Pull Request.
-
-### TODO
-1. Logger support
