@@ -14,6 +14,7 @@ end
 require 'minitest/autorun'
 require 'byebug'
 require 'rong_cloud'
+require 'fileutils'
 
 def rong_cloud_configure_with_settings
   RongCloud.configure do |config|
@@ -21,5 +22,8 @@ def rong_cloud_configure_with_settings
     config.app_secret = ENV["RONGCLOUD_APP_SECRET"]
     config.host = ENV["RONGCLOUD_API_HOST"] || "https://api.cn.ronghub.com"
     config.timeout = 10
+    config.debug_mode = true
+
+    FileUtils.mkdir_p "log/"
   end
 end
