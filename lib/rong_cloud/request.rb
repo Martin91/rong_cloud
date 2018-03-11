@@ -1,6 +1,7 @@
 require 'net/http'
 require 'json'
 require 'rong_cloud/signature'
+require 'logger'
 
 module RongCloud
   # Handle api request, based on Ruby's built-in Net::HTTP,
@@ -23,9 +24,11 @@ module RongCloud
       request_options = { use_ssl: use_ssl, open_timeout: timeout, read_timeout: timeout }
 
       res = Net::HTTP.start(uri.hostname, uri.port, request_options) do |http|
+        inspect_debug_informations(req, uri, request_options)
         http.request(req)
       end
 
+      inspect_debug_informations(res)
       handle_response(res)
     end
 
@@ -78,6 +81,30 @@ module RongCloud
         error.business_code = json["code"]
         raise error
       end
+    end
+
+    def inspect_debug_informations(*objects)
+      return unless RongCloud::Configuration.debug_mode
+
+      objects.each do |obj|
+        begin
+          case
+          when obj.is_a?(URI::Generic)
+            logger.debug("Requesting #{obj.hostname}:#{obj.port}")
+          when obj.is_a?(Net::HTTPGenericRequest)
+            logger.debug("request method: #{obj.method}, headers: #{obj.to_hash}, raw body: #{obj.body}")
+          when obj.is_a?(Net::HTTPResponse)
+            logger.debug("response headers: #{obj.to_hash}, raw body: #{obj.body}")
+          else
+            logger.debug(obj.inspect)
+          end
+        rescue
+        end
+      end
+    end
+
+    def logger
+      @logger ||= ::Logger.new("log/rong_cloud_debug.log")
     end
   end
 end
